@@ -10,14 +10,13 @@ use App\Http\Controllers\Api\Invoices\Model\Invoices;
 
 class InvoicesRepository extends Repository
 {
-    protected $model;
 
     /**
-     * MedicalServicesTypesRepository constructor.
+     * InvoicesRepository constructor.
      */
-    function __construct()
+    function setModelName()
     {
-        return $this->model = new Invoices;
+        return new Invoices;
     }
 
     public function getList($pagination = null)

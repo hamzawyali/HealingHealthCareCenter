@@ -8,6 +8,16 @@ use Illuminate\Validation\Rule;
 abstract class Repository
 {
     public $pagination = 10;
+    protected $model;
+    protected $columns = array('*');
+
+
+    public function __construct()
+    {
+        $this->model = $this->setModelName();
+    }
+
+    abstract function setModelName();
 
     /**
      * get table name
@@ -75,5 +85,35 @@ abstract class Repository
     public function update(array $data, $id, $attribute = "id")
     {
         return $this->model->where($attribute, '=', $id)->update($data);
+    }
+
+    /**
+     * Get record by some other attribute
+     *
+     * @param $field
+     * @param $value
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findBy($field, $value, $columns = null)
+    {
+        $columns = $this->setColumns($columns);
+        return $this->model->where($field, '=', $value)->first($columns);
+    }
+
+    /**
+     * check and set data in columus array
+     *
+     * @param array $columns
+     *
+     * @return array
+     */
+    private function setColumns($columns)
+    {
+        if ($columns == null)
+            return $columns = $this->columns;
+        else
+            return $columns;
     }
 }

@@ -9,16 +9,21 @@ use App\Http\Controllers\Api\MedicalServices\Model\MedicalServices;
 
 class MedicalServicesRepository extends Repository
 {
-    protected $model;
 
     /**
-     * MedicalServicesTypesRepository constructor.
+     * set class model name.
+     * @return MedicalServices
      */
-    function __construct()
+    function setModelName()
     {
-        return $this->model = new MedicalServices;
+        return new MedicalServices;
     }
 
+    /**
+     * get medical services list.
+     * @param null $pagination
+     * @return mixed
+     */
     public function getList($pagination = null)
     {
         if (is_null($pagination))
