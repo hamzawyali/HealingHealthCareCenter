@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PatientAuthController extends Controller
+class AgentAuthController extends Controller
 {
     public function register(Request $request)
     {

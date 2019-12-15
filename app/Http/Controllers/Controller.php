@@ -16,6 +16,7 @@ class Controller extends BaseController
      * user_id
      */
     public $user_id;
+    public $client_id = 2;
 
     /**
      * Controller constructor.
@@ -28,8 +29,8 @@ class Controller extends BaseController
         $divides = explode('/', $prefix);
 
         $provider = isset($divides[1]) ? $divides[1] : '';
-        if ($provider == 'agents' && isset(auth('agents')->user()->id))
-            $this->user_id = auth('agents')->user()->id;
+        if ($provider == 'agents' && isset(auth('agent')->user()->id))
+            $this->user_id = auth('agent')->user()->id;
     }
 
     /**

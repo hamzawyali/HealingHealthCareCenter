@@ -32,4 +32,9 @@ class PatientRepository extends Repository
 
         return $patientId;
     }
+
+    public function getPatientEmail($patient_id)
+    {
+        return $this->model->select('id', 'email', 'phone')->where('id', $patient_id)->first();
+    }
 }

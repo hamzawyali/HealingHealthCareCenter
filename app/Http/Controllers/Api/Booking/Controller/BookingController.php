@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Booking\Controller;
 
-use App\Http\Controllers\Api\Booking\Repository\BookingRepository;
+use App\Http\Controllers\Api\Booking\Repository\AgentsRepository;
 use App\Http\Controllers\Api\Patients\Repository\PatientRepository;
 use App\Http\Controllers\Response;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class BookingController extends Controller
 {
     /**
-     * @var BookingRepository
+     * @var AgentsRepository
      */
     private $booking;
     /**
@@ -24,7 +24,7 @@ class BookingController extends Controller
      */
     public function __construct()
     {
-        $this->booking = new BookingRepository;
+        $this->booking = new AgentsRepository;
         $this->patient = new PatientRepository;
     }
 

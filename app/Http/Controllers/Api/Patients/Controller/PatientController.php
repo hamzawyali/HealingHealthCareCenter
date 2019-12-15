@@ -39,7 +39,6 @@ class PatientController extends Controller
             'name' => $request->name,
             'description' => $request->description
         ])->id;
-//        $this->HandleLog('departments', 'Departments', 'create', $this->user_id, $departmentId);
 
         return $this->Success201();
     }

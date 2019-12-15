@@ -47,9 +47,14 @@ return [
             'hash' => false,
         ],
 
-        'patient' => [
+        'agent' => [
             'driver' => 'passport',
-            'provider' => 'patient',
+            'provider' => 'agent',
+        ],
+
+        'agentApi' => [
+            'driver' => 'session',
+            'provider' => 'agent',
         ],
     ],
 
@@ -76,9 +81,9 @@ return [
             'model' => App\User::class,
         ],
 
-        'admin' => [
+        'agent' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Http\Controllers\Api\Agents\Model\Agents::class,
         ],
 
         // 'users' => [

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+Auth::routes();
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('patient/register', 'Api\MyAuth\PatientAuthController@register');
-Route::post('patient/login', 'Api\MyAuth\PatientAuthController@login');
+
+Route::post('agent/register', 'Api\Agents\Controller\AgentsController@register');
+Route::post('agent/login', 'Api\Agents\Controller\AgentsController@login');
 Route::get('payment/callback/{providerType}', 'Api\Payment\Controller\PaymentController@callBack');
 
 Route::group(['prefix' => 'patients'], function () {
@@ -27,7 +29,8 @@ Route::group(['prefix' => 'patients'], function () {
     Route::get('booking/list/{phone}', 'Api\Booking\Controller\BookingController@list');
 });
 
-Route::group(['prefix' => 'agents'], function () {
+Route::group(['prefix' => 'agents', 'middleware' => ['auth:agent', 'agent']], function () {
+
 //    Route::post('medical-services/list', 'Api\MedicalServices\Controller\MedicalServicesController@list');
 //    Route::post('medical-services/create', 'Api\MedicalServices\Controller\MedicalServicesController@create');
 //    Route::post('medical-services/{id}/update', 'Api\MedicalServices\Controller\MedicalServicesController@update');
