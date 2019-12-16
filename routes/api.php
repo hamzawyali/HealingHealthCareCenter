@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+
 Auth::routes();
 
 /*
@@ -27,13 +28,15 @@ Route::group(['prefix' => 'patients'], function () {
     Route::post('medical-services/list', 'Api\MedicalServices\Controller\MedicalServicesController@list');
     Route::post('booking', 'Api\Booking\Controller\BookingController@create');
     Route::get('booking/list/{phone}', 'Api\Booking\Controller\BookingController@list');
+    Route::post('invoices/list', 'Api\Invoices\Controller\InvoicesController@list');
 });
 
 Route::group(['prefix' => 'agents', 'middleware' => ['auth:agent', 'agent']], function () {
 
-//    Route::post('medical-services/list', 'Api\MedicalServices\Controller\MedicalServicesController@list');
-//    Route::post('medical-services/create', 'Api\MedicalServices\Controller\MedicalServicesController@create');
-//    Route::post('medical-services/{id}/update', 'Api\MedicalServices\Controller\MedicalServicesController@update');
+    Route::post('medical-services/list', 'Api\MedicalServices\Controller\MedicalServicesController@list');
+    Route::post('medical-services/create', 'Api\MedicalServices\Controller\MedicalServicesController@create');
+    Route::post('medical-services/{id}/update', 'Api\MedicalServices\Controller\MedicalServicesController@update');
+    Route::post('invoices/list', 'Api\Invoices\Controller\InvoicesController@list');
 //    Route::post('invoices/create', 'Api\Invoices\Controller\InvoicesController@create');
 //    Route::post('appointments/list', 'Api\Appointments\Controller\AppointmentsController@list');
 

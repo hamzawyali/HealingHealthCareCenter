@@ -37,4 +37,22 @@ class MedicalServicesTest extends TestCase
             ]
         ]);
     }
+
+
+    public function testMedicalServicesError400Response()
+    {
+
+        $response = $this->post(
+            'api/patients/medical-services/list',
+            [
+                'id' => 'string string string'
+            ]
+        );
+        $response->assertStatus(400);
+        $response->assertJsonStructure([
+            "error" => [
+                "id"
+            ]
+        ]);
+    }
 }

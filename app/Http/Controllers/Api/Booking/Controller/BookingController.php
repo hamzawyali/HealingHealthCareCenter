@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api\Booking\Controller;
 
-use App\Http\Controllers\Api\Booking\Repository\AgentsRepository;
+use App\Http\Controllers\Api\Booking\Repository\BookingRepository;
 use App\Http\Controllers\Api\Patients\Repository\PatientRepository;
 use App\Http\Controllers\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BookingController extends Controller
+class BookingController extends Controller implements BookingInterFace
 {
     /**
-     * @var AgentsRepository
+     * @var BookingRepository
      */
     private $booking;
     /**
@@ -24,7 +24,7 @@ class BookingController extends Controller
      */
     public function __construct()
     {
-        $this->booking = new AgentsRepository;
+        $this->booking = new BookingRepository;
         $this->patient = new PatientRepository;
     }
 
@@ -43,8 +43,8 @@ class BookingController extends Controller
             'date_time' => 'date_format:"Y-m-d H:i:s',
             'patient' => 'required|array',
             'patient.name' => 'required|string:max:255',
-            'patient.email' => 'required|email',
-            'patient.phone' => 'required|string:max:15',
+            'patient.email' => 'required|email|unique:patients,email',
+            'patient.phone' => 'required|string:max:15|unique:patients,phone',
         ]);
 
         if ($check !== true)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Booking\Repository;
 
 
 use App\Http\Controllers\Api\Booking\Model\Agents;
+use App\Http\Controllers\Api\Booking\Model\Booking;
 use App\Http\Controllers\Repository;
 
 class BookingRepository extends Repository
@@ -12,7 +13,7 @@ class BookingRepository extends Repository
 
     function setModelName()
     {
-        return new Agents;
+        return new Booking;
     }
 
     public function getList($phone)

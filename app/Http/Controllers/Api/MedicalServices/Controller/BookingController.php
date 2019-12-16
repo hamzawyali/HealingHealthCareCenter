@@ -7,12 +7,12 @@ use App\Http\Controllers\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MedicalServicesController extends Controller
+class BookingController extends Controller implements BookingInterFace
 {
     private $medicalServices;
 
     /**
-     * MedicalServicesController constructor.
+     * BookingController constructor.
      */
     public function __construct()
     {
@@ -27,7 +27,7 @@ class MedicalServicesController extends Controller
     {
         $validatedData = $this->patientValidator([
             'id' => 'numeric',
-            'name' => 'string',
+            'name' => 'string|max:100',
             'description' => 'string|max:255',
         ]);
 
@@ -50,18 +50,17 @@ class MedicalServicesController extends Controller
     public function create(Request $request)
     {
         $check = $this->patientValidator([
-            'name' => 'required|string:max:255|unique:medical_services',
-            'description' => 'string',
+            'name' => 'required|string:max:100|unique:medical_services',
+            'description' => 'string:max:255',
         ]);
 
         if ($check !== true)
             return $check;
 
-        $medicalServicesId = $this->medicalServices->create([
+        $this->medicalServices->create([
             'name' => $request->name,
             'description' => $request->description
-        ])->id;
-//        $this->HandleLog('departments', 'Departments', 'create', $this->user_id, $departmentId);
+        ]);
 
         return $this->Success201();
     }
@@ -82,8 +81,8 @@ class MedicalServicesController extends Controller
 
         $check = $this->patientValidator([
             'id' => 'required|numeric|exists:medical_services,id',
-            'name' => 'required|string:max:255|unique:medical_services,id,' .$id,
-            'description' => 'string',
+            'name' => 'required|string:max:100|unique:medical_services,id,' .$id,
+            'description' => 'string:max:255',
         ]);
 
         if ($check !== true)

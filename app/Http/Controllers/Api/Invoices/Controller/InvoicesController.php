@@ -19,7 +19,7 @@ class InvoicesController extends Controller
     private $patients;
 
     /**
-     * MedicalServicesController constructor.
+     * BookingController constructor.
      */
     public function __construct()
     {
@@ -36,10 +36,10 @@ class InvoicesController extends Controller
     public function list(Request $request)
     {
         $validatedData = $this->patientValidator([
-            'agent_id' => 'required|numeric',
-            'appointment_id' => 'required|numeric|exists:appointments,id',
-            'status' => 'required|string|in:pending,paid',
-            'original_amount' => 'required|numeric',
+            'agent_id' => 'numeric',
+            'appointment_id' => 'numeric|exists:appointments,id',
+            'status' => 'string|in:pending,paid',
+            'original_amount' => 'numeric',
             'discount' => 'numeric'
         ]);
 

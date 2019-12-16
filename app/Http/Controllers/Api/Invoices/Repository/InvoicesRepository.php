@@ -24,7 +24,7 @@ class InvoicesRepository extends Repository
         if (is_null($pagination))
             $pagination = $this->pagination;
 
-        $data = $this->model->select('id', 'agent_id', 'appointment_id', 'status', 'original_amount', 'discount')
+        $data = $this->model->select('id', 'agent_id', 'patient_id', 'status', 'original_amount', 'discount', 'total_amount')
             ->orderBy('id', 'ASC');
 
         $data = $this->filters($data);
