@@ -7,12 +7,12 @@ use App\Http\Controllers\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BookingController extends Controller implements BookingInterFace
+class MedicalServicesController extends Controller implements MedicalServicesInterFace
 {
     private $medicalServices;
 
     /**
-     * BookingController constructor.
+     * MedicalServicesController constructor.
      */
     public function __construct()
     {

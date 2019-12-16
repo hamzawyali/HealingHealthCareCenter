@@ -19,7 +19,7 @@ class InvoicesController extends Controller
     private $patients;
 
     /**
-     * BookingController constructor.
+     * MedicalServicesController constructor.
      */
     public function __construct()
     {
