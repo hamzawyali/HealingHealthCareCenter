@@ -31,4 +31,18 @@ class InvoicesRepository extends Repository
 
         return $data->paginate($pagination);
     }
+
+    public function check48Hours()
+    {
+        $checkTime = date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -2 days"));
+        return $this->model->where('status', 'pending')
+            ->where('created_at', '<=', $checkTime)
+            ->where('is_notification', 0)
+            ->with([
+                'Patient' => function ($patient) {
+                    $patient->select('id','name', 'email', 'phone');
+                }
+            ])
+            ->get();
+    }
 }

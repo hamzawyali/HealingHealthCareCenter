@@ -74,8 +74,8 @@ class InvoicesController extends Controller
 
         $this->createInvoiceBooking($request, $this->createInvoice($request));
 
-        $patientDetails = $this->patients->getPatientEmail($request->patient_id);
-//dd($patientDetails->phone);
+        $patientDetails = $this->patients->getPatientDetails($request->patient_id);
+
         Mail::to($patientDetails->email)->send(new InvoiceMail($request->original_amount, $request->discount, $this->handleDiscount($request)));
 
         Nexmo::message()->send([
